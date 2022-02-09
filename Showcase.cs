@@ -15,14 +15,24 @@ namespace Store2022
             games = new Game[size];
         }
 
+        public Game Peek(int index)
+        {
+            if (index >= 0 && index < games.Length)
+                return games[index];
+            else
+                return null;
+        }
+
         public void Add(int index, Game game)
         {
-            games[index] = game;
+            if (index >= 0 && index < games.Length)
+                games[index] = game;
         }
 
         public void Remove(int index)
         {
-            games[index] = null;
+            if (index >= 0 && index < games.Length)
+                games[index] = null;
         }
 
         public string PrintGames()
@@ -31,7 +41,7 @@ namespace Store2022
             for (int i = 0; i < games.Length; i++)
             {
                 if (games[i] != null)
-                    print += games[i].GiveGameDescription() + "\n";
+                    print += "["+i+"] " + games[i].GiveGameDescription() + "\n";
             }
             return print;
         }
