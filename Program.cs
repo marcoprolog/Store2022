@@ -11,7 +11,7 @@ namespace Store2022
         static void Main(string[] args)
         {
             Store store = new Store();
-            float userMoney = 25f;
+            float userMoney = 65f;
             Console.WriteLine("Welcome to to our game store!");
             bool shouldContinue = true;
             do
@@ -25,15 +25,24 @@ namespace Store2022
                         break;
                     case "buy":
                         //ask the player what game they want to buy
-                        Console.WriteLine("Which game would you like to buy? [Insert number]");
+                        Console.WriteLine("Which game would you like to buy? [Insert number]\n Money available: " + userMoney);
                         //read user input
                         string gameToBuy = Console.ReadLine();
                         //convert to int (note that it crashes if you don't input a number
                         int index = int.Parse(gameToBuy);
-                        //(optional and currently unused) get the game we're about to remove
+                        // get the game we're about to remove
                         Game g = store.showcase.Peek(index);
-                        //remove the game (the check if the index is valid is done within Showcase.Remove)
-                        store.showcase.Remove(index);
+                        if (userMoney>= g.price)
+                        {
+                            //remove the game (the check if the index is valid is done within Showcase.Remove)
+                            store.showcase.Remove(index);
+                            //calculate the new money
+                            userMoney -= g.price;
+                            Console.WriteLine("You bought {0}\n Money left: {1}", g.name, userMoney);
+                        }
+                        else
+                            Console.WriteLine("You're too poor!");
+
                         break;
                     case "add":
                         // keep this for later

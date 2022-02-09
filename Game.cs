@@ -9,7 +9,7 @@ namespace Store2022
     class Game
     {
         public float price;
-        string name;
+        public string name;
         Genre[] genre;
         bool esport = false;
         //bool isBought; //maybe in a User class
